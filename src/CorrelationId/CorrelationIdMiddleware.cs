@@ -55,8 +55,13 @@ namespace CorrelationId
                                                     " 'ICorrelationIdBuilder'.");
             }
 
-            var hasCorrelationIdHeader = context.Request.Headers.TryGetValue(_options.RequestHeader, out var cid) &&
-                                           !StringValues.IsNullOrEmpty(cid);
+            StringValues cid;
+            if (_options.RequestHeaderCallback != null)
+                cid = _options.RequestHeaderCallback(context.Request.Headers);
+            else
+                context.Request.Headers.TryGetValue(_options.RequestHeader, out cid);
+            
+            var hasCorrelationIdHeader = !StringValues.IsNullOrEmpty(cid);
 
             if (!hasCorrelationIdHeader && _options.EnforceHeader)
             {

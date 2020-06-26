@@ -1,5 +1,7 @@
 ﻿using System;
 using CorrelationId.Abstractions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace CorrelationId
 {
@@ -18,6 +20,11 @@ namespace CorrelationId
         /// </summary>
         public const string LoggerScopeKey = "CorrelationId";
 
+        /// <summary>
+        /// A callback to resolve the correlation ID. 
+        /// </summary>
+        public Func<IHeaderDictionary, StringValues> RequestHeaderCallback { get; set; }
+        
         /// <summary>
         /// The name of the header from which the Correlation ID is read from the request.
         /// </summary>
