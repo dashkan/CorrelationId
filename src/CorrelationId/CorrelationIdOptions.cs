@@ -23,7 +23,7 @@ namespace CorrelationId
         /// <summary>
         /// A callback to resolve the correlation ID. 
         /// </summary>
-        public Func<IHeaderDictionary, StringValues> RequestHeaderCallback { get; set; }
+        public Func<CorrelationIdOptions, IHeaderDictionary, StringValues> RequestHeaderCallback { get; set; }
         
         /// <summary>
         /// The name of the header from which the Correlation ID is read from the request.

@@ -57,7 +57,7 @@ namespace CorrelationId
 
             StringValues cid;
             if (_options.RequestHeaderCallback != null)
-                cid = _options.RequestHeaderCallback(context.Request.Headers);
+                cid = _options.RequestHeaderCallback(_options, context.Request.Headers);
             else
                 context.Request.Headers.TryGetValue(_options.RequestHeader, out cid);
             
